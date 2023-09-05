@@ -23,7 +23,7 @@ runs:
         token: ${{ inputs.token }}
     - uses: actions/checkout@v2.7.0
       with:
-        repository: 'zisismaras/marlin_auto_build'
+        repository: 'KamensekD/marlin_auto_build'
         path: 'marlin_auto_build'
         persist-credentials: false
     - uses: actions/setup-node@v2

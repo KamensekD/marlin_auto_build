@@ -207,7 +207,7 @@ async function doBuild(latestVersion: string, kind: "stable" | "nightly", buildD
             .replace("{{timestamp}}", timestamp.toString())
             .replace("{{uid}}", randomInt(100000, 999999).toString());
         if (!filename.endsWith(".bin")) filename += ".bin";
-console.log("Add asset:", buildName, filename, buildPath);
+console.log(`Add asset: ${buildName}, ${filename}, ${buildPath}`);
         assets.push({buildName, filename, buildPath, action: buildDef.action, assetId: buildDef.assetId});
     }
 
@@ -217,22 +217,22 @@ console.log("Add asset:", buildName, filename, buildPath);
 
     console.log(chalk.green("creating release"));
     const uploadUrl = await createRelease(latestVersion, kind, currentDateTime);
-console.log("latestVersion:", latestVersion, "kind:", kind, "CurrentDateTime:", CurrentDateTime`);
-console.log("uploadUrl:", uploadUrl);
+console.log(`latestVersion: ${latestVersion}, kind: ${kind}, CurrentDateTime: ${CurrentDateTime}`);
+console.log(`uploadUrl:", ${uploadUrl}`);
     for (const asset of assets) {
         console.log(chalk.green(`uploading ${chalk.underline(asset.filename)}`));
-console.log("uploading:", asset);
+console.log(`uploading: ${asset}`);
         const assetId = await uploadAsset(uploadUrl, asset);
         buildDefs[asset.buildName].assetId = assetId;
-console.log("assetID:", assetID);
+console.log(`assetID: ${assetID}`);
     }
     for (const buildDef of Object.values(buildDefs)) {
-console.log("deleting:", buildDef);
+console.log(`deleting: ${buildDef}`);
         //@ts-ignore
         delete buildDef.build;
         //@ts-ignore
         delete buildDef.action;
     }
-console.log("writing:", `./last_${kind}.json`);
+console.log(`writing: ./last_${kind}.json`);
     await writeFile(`./last_${kind}.json`, JSON.stringify(buildDefs, null, 4));
 }

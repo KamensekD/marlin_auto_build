@@ -207,7 +207,7 @@ async function doBuild(latestVersion: string, kind: "stable" | "nightly", buildD
             .replace("{{timestamp}}", timestamp.toString())
             .replace("{{uid}}", randomInt(100000, 999999).toString());
         if (!filename.endsWith(".bin")) filename += ".bin";
-console.log(`${chalk.underline(Add asset:)} buildName, filename, buildPath`);
+console.log(`${chalk.underline(Add asset:)}`, buildName, filename, buildPath);
         assets.push({buildName, filename, buildPath, action: buildDef.action, assetId: buildDef.assetId});
     }
 
@@ -217,22 +217,22 @@ console.log(`${chalk.underline(Add asset:)} buildName, filename, buildPath`);
 
     console.log(chalk.green("creating release"));
     const uploadUrl = await createRelease(latestVersion, kind, currentDateTime);
-console.log(`${chalk.underline(latestVersion:)} latestVersion ${chalk.underline(kind:)}` kind ${chalk.underline(CurrentDateTime:)} CurrentDateTime);
-console.log(`${chalk.underline(uploadUrl:)} uploadUrl`);
+console.log(`${chalk.underline(latestVersion:)}`, latestVersion,`${chalk.underline(kind:)}`, kind, `${chalk.underline(CurrentDateTime:)}`, CurrentDateTime`);
+console.log(`${chalk.underline(uploadUrl:)}`, uploadUrl);
     for (const asset of assets) {
         console.log(chalk.green(`uploading ${chalk.underline(asset.filename)}`));
-console.log(`${chalk.underline(uploading:)} asset`);
+console.log(`${chalk.underline(uploading:)}`, asset);
         const assetId = await uploadAsset(uploadUrl, asset);
         buildDefs[asset.buildName].assetId = assetId;
-console.log(`${chalk.underline(ID:)} assetID`);
+console.log(`${chalk.underline(ID:)}`, assetID);
     }
     for (const buildDef of Object.values(buildDefs)) {
-console.log(`${chalk.underline(deleting:)} buildDef`);
+console.log(`${chalk.underline(deleting:)}`, buildDef);
         //@ts-ignore
         delete buildDef.build;
         //@ts-ignore
         delete buildDef.action;
     }
-console.log(`${chalk.underline(writing:)} ./last_${kind}.json`);
+console.log(`${chalk.underline(writing:)}`, `./last_${kind}.json`);
     await writeFile(`./last_${kind}.json`, JSON.stringify(buildDefs, null, 4));
 }

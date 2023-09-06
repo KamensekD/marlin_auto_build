@@ -207,6 +207,7 @@ async function doBuild(latestVersion: string, kind: "stable" | "nightly", buildD
             .replace("{{timestamp}}", timestamp.toString())
             .replace("{{uid}}", randomInt(100000, 999999).toString());
         if (!filename.endsWith(".bin")) filename += ".bin";
+console.log(`Add asset: ${chalk.underline(buildName, filename, buildPath)}`);
         assets.push({buildName, filename, buildPath, action: buildDef.action, assetId: buildDef.assetId});
     }
 
@@ -216,12 +217,14 @@ async function doBuild(latestVersion: string, kind: "stable" | "nightly", buildD
 
     console.log(chalk.green("creating release"));
     const uploadUrl = await createRelease(latestVersion, kind, currentDateTime);
+console.log(`uploadUrl: ${chalk.underline(uploadUrl)}`);
     for (const asset of assets) {
         console.log(chalk.green(`uploading ${chalk.underline(asset.filename)}`));
         const assetId = await uploadAsset(uploadUrl, asset);
         buildDefs[asset.buildName].assetId = assetId;
     }
     for (const buildDef of Object.values(buildDefs)) {
+console.log(`deleting: ${chalk.underline(buildDef)}`);
         //@ts-ignore
         delete buildDef.build;
         //@ts-ignore

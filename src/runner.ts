@@ -217,14 +217,14 @@ console.log(`Add asset: ${buildName}, ${filename}, ${buildPath}`);
 
     console.log(chalk.green("creating release"));
     const uploadUrl = await createRelease(latestVersion, kind, currentDateTime);
-console.log(`latestVersion: ${latestVersion}, kind: ${kind}, CurrentDateTime: ${CurrentDateTime}`);
+console.log(`latestVersion: ${latestVersion}, kind: ${kind}, currentDateTime: ${currentDateTime}`);
 console.log(`uploadUrl:", ${uploadUrl}`);
     for (const asset of assets) {
         console.log(chalk.green(`uploading ${chalk.underline(asset.filename)}`));
 console.log(`uploading: ${asset}`);
         const assetId = await uploadAsset(uploadUrl, asset);
         buildDefs[asset.buildName].assetId = assetId;
-console.log(`assetID: ${assetID}`);
+console.log(`assetId: ${assetId}`);
     }
     for (const buildDef of Object.values(buildDefs)) {
 console.log(`deleting: ${buildDef}`);

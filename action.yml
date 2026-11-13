@@ -17,21 +17,21 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v4
       with:
         repository: ${{ inputs.repository }}
         token: ${{ inputs.token }}
-    - uses: actions/checkout@v2.7.0
+    - uses: actions/checkout@v4
       with:
         repository: 'KamensekD/marlin_auto_build'
         path: 'marlin_auto_build'
         persist-credentials: false
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v4
       with:
-        node-version: '16'
-    - uses: actions/setup-python@v2
+        node-version: '24'
+    - uses: actions/setup-python@v5
       with:
-        python-version: '3.9'
+        python-version: '3.12'
     - run: pip install -U platformio
       shell: bash
     - run: cd marlin_auto_build && npm install

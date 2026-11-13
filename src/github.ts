@@ -14,7 +14,7 @@ const request = axios.create({
 
 export async function getLatestStable(): Promise<string> {
     const res = await retry(() => request.get("/MarlinFirmware/Marlin/releases/latest"), {retries: 3});
-console.log(`checking for latest stable at "https://api.github.com/repos/MarlinFirmware/Marlin/releases/latest"`);    
+console.log(`[@Debug]checking for latest stable at "https://api.github.com/repos/MarlinFirmware/Marlin/releases/latest"`);    
     const release = res.data;
     if (isMarlin2(release.tag_name)) {
         return release.tag_name;
@@ -33,7 +33,7 @@ function isMarlin2(version: string) {
 
 export async function getLatestNightly(): Promise<string> {
     const res = await retry(() => request.get("/MarlinFirmware/Marlin/commits?sha=bugfix-2.1.x&per_page=1"), {retries: 3});
-console.log(`checking for latest bugfix 2.1.x at "https://api.github.com/repos/MarlinFirmware/Marlin/commits?sha=bugfix-2.1.x&per_page=1"`);    
+console.log(`[@Debug]checking for latest bugfix 2.1.x at "https://api.github.com/repos/MarlinFirmware/Marlin/commits?sha=bugfix-2.1.x&per_page=1"`);    
     return res.data[0].sha;
 }
 

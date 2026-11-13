@@ -1,3 +1,11 @@
+```diff
+! [@Debug] version differences:
+```
+https://github.com/KamensekD/marlin_auto_build/compare/master...KamensekD:marlin_auto_build:Debug
+https://github.com/KamensekD/marlin_auto_build/compare/master_zisismaras...KamensekD:marlin_auto_build:Debug
+https://github.com/zisismaras/marlin_auto_build/compare/master...KamensekD:marlin_auto_build:Debug
+___
+
 # Marlin auto build
 
 Marlin auto build is a build system for [Marlin](https://github.com/MarlinFirmware/Marlin) that allows you to build firmwares for your printer directly on github using [github actions](https://github.com/features/actions) without having to install anything on your local machine.  

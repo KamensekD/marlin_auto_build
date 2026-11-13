@@ -24,12 +24,11 @@ runs:
     - uses: actions/checkout@v4
       with:
         repository: 'KamensekD/marlin_auto_build'
-        ref: ${{ github.action_ref }}
         path: 'marlin_auto_build'
         persist-credentials: false
     - uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '24'
     - uses: actions/setup-python@v5
       with:
         python-version: '3.12'
